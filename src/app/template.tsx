@@ -1,52 +1,49 @@
 'use client'
+import { motion } from "framer-motion"
+import Link from "next/link";
 
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-export default function Template({ children }: { children: React.ReactNode }) {
+export default function Template({ children }: { children: React.ReactNode; }) {
 
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
-  // https://nextjs.org/docs/app/api-reference/functions/use-search-params#examples
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
-
-      return params.toString()
-    },
-    [searchParams]
+  useEffect(
+    () => {
+      console.log(" log here. ")
+    }, []
   )
 
   return (
     <>
-      <nav className="h-24 mt-10 py-2 container flex items-center justify-left px-6 mx-auto text-gray-600 capitalize dark:text-gray-300">
+      <nav className="relative bg-white shadow dark:bg-gray-800">
+        <div className="container px-6 pt-3 mx-auto">
+          <div className="py-3 mt-3 -mx-3 overflow-y-auto whitespace-nowrap scroll-hidden">
+            <nav className="container flex items-center justify-left px-6 mx-auto ">
 
-        <button onClick={() => {
-          router.push("/" + '?' + createQueryString('q', ''))
+              <motion.li initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="list-none mx-4 text-sm leading-5 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:underline md:my-0">
+                <Link href="/javascript" >JavaScript</Link>
+              </motion.li>
 
-        }} className="text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-blue-500 mx-1.5 sm:mx-6">
-          All Posts
-        </button>
+              <motion.li initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="list-none mx-4 text-sm leading-5 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:underline md:my-0">
+                <Link href="/typescript" >TypeScrip</Link>
+              </motion.li>
 
-        <button onClick={() => {
-          router.push("/" + '?' + createQueryString('q', 'expert'))
-        }} className="border-b-2 border-transparent hover:text-gray-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">Expert</button>
+              <motion.li initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="list-none border-b-2 border-transparent hover:text-gray-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">
+                <Link href="/reactjs" >Reactjs</Link>
+              </motion.li>
 
-        <button onClick={() => {
-          router.push("/" + '?' + createQueryString('q', 'dave'))
-        }} className="border-b-2 border-transparent hover:text-gray-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">Dave</button>
+              <motion.li initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="list-none border-b-2 border-transparent hover:text-gray-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">
+                <Link href="/nextjs" >Nextjs</Link>
+              </motion.li>
 
-        <button onClick={() => {
-          router.push("/" + '?' + createQueryString('q', 'exactly'))
-        }} className="border-b-2 border-transparent hover:text-gray-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">Exactly</button>
-
+            </nav>
+          </div>
+        </div>
       </nav>
 
       <main className="py-12 container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
-        <div className="lg:w-3/4 xl:w-2/4 mx-auto"> {children} </div>
+        {children}
       </main>
     </>
   )
