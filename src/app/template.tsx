@@ -1,10 +1,7 @@
 'use client'
 import { motion } from "framer-motion"
 import Link from "next/link";
-
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Template({ children }: { children: React.ReactNode; }) {
 
